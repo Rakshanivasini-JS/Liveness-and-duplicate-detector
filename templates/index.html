@@ -1,0 +1,152 @@
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Face Deduplication</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2eXKc7bVqg3L3t2pXmD4y8fJ/3b9b4f4WJ4R4f4t4A4f4u4b4r4k4t4A4f4t4U4U4u4u4" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col font-sans">
+  <header class="flex items-center justify-between bg-white shadow px-6 py-4">
+    <div class="flex items-center space-x-2">
+      <span class="font-bold italic text-2xl text-gray-800 select-none"><img src="{{ url_for('static', filename='image.jpeg') }}" alt="" style="width: 200px; height: 50px;"></span>
+    </div>
+    <div class="flex items-center space-x-6 text-gray-700 text-sm select-none cursor-default">
+      <span>Admin</span>
+    </div>
+  </header>
+
+  <main class="flex-grow container mx-auto px-4 py-10 max-w-4xl">
+    <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center space-y-6">
+      <button id="startBtn" class="bg-green-700 px-6 py-2 text-white font-semibold rounded hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-1 transition-all duration-200">
+        Start Liveness Check
+      </button>
+      <button id="captureBtn" class="bg-blue-700 px-6 py-2 text-white font-semibold rounded hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-all duration-200 hidden">
+        Capture Photo
+      </button>
+
+      <div class="w-full max-w-sm aspect-video bg-gray-100 rounded-lg overflow-hidden shadow-md flex items-center justify-center relative">
+        <img id="videoStream" src="{{ url_for('video_feed') }}" class="w-full h-full object-cover">
+      </div>
+
+      <div id="registrationForm" class="flex flex-col items-center space-y-4 hidden">
+        <input type="text" id="personName" placeholder="Enter person's name" class="px-4 py-2 border rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button id="registerBtn" class="bg-purple-700 px-6 py-2 text-white font-semibold rounded hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-1">
+          Add Person
+        </button>
+      </div> 
+
+    
+      
+      <div id="instructionLabel" class="font-semibold text-lg text-blue-600">
+        Click "Start Liveness Check" to begin.
+      </div>
+
+      <div id="result" class="inline-flex items-center font-semibold text-lg rounded px-4 py-2 bg-gray-100 text-gray-700">
+        Result | <span id="resultLabel" class="ml-1 text-gray-600">-</span>
+      </div>
+    </div>
+    
+    <section class="mt-12 bg-white rounded-lg shadow p-6">
+      <h2 class="text-lg font-semibold mb-4 border-b border-gray-300 pb-1">Recent Verifications</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead>
+            <tr class="text-gray-600 uppercase tracking-wide border-b border-gray-300">
+              <th class="py-2 px-3 w-24">Photo</th>
+              <th class="py-2 px-3">Datetime</th>
+              <th class="py-2 px-3">Source</th>
+              <th class="py-2 px-3">Status</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBody" class="divide-y divide-gray-200">
+              </tbody>
+        </table>
+      </div>
+    </section> 
+  </main>
+
+  <footer class="bg-white text-gray-500 text-center text-xs py-4 select-none">
+    ©️ 2024 TVS AI Face Deduplication. All rights reserved.
+  </footer>
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Face Deduplication</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col font-sans">
+  <header class="flex items-center justify-between bg-white shadow px-6 py-4">
+    <div class="flex items-center space-x-2">
+      <!-- <span class="font-bold italic text-2xl text-gray-800 select-none"><img src="{{ url_for('static', filename='image.jpeg') }}" alt="" style="width: 200px; height: 50px;"></span> -->
+    </div>
+    <div class="flex items-center space-x-6 text-gray-700 text-sm select-none cursor-default">
+      <span>Admin</span>
+    </div>
+  </header>
+
+  <main class="flex-grow container mx-auto px-4 py-10 max-w-4xl">
+    <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center space-y-6">
+      <button id="startBtn" class="bg-green-700 px-6 py-2 text-white font-semibold rounded hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-1 transition-all duration-200">
+        Start Liveness Check
+      </button>
+      <button id="captureBtn" class="bg-blue-700 px-6 py-2 text-white font-semibold rounded hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-all duration-200 hidden">
+        Capture Photo
+      </button>
+
+      <div class="w-full max-w-sm aspect-video bg-gray-100 rounded-lg overflow-hidden shadow-md flex items-center justify-center relative">
+        <img id="videoStream" src="{{ url_for('video_feed') }}" class="w-full h-full object-cover">
+      </div>
+
+      <div id="registrationForm" class="flex flex-col items-center space-y-4 hidden">
+        <div class="flex items-center space-x-2">
+          <img src="{{ url_for('static', filename='fingerprint.avif') }}" alt="Fingerprint icon" class="w-8 h-8" style="width: 60px; height: 60px;" />
+          <input type="text" id="personName" placeholder="Enter person's name" class="px-4 py-2 border rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <button id="registerBtn" class="bg-purple-700 px-6 py-2 text-white font-semibold rounded hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-1">
+          Add Person
+        </button>
+      </div>
+      
+      <div id="instructionLabel" class="font-semibold text-lg text-blue-600">
+        Click "Start Liveness Check" to begin.
+      </div>
+
+      <div id="result" class="inline-flex items-center font-semibold text-lg rounded px-4 py-2 bg-gray-100 text-gray-700">
+        Result | <span id="resultLabel" class="ml-1 text-gray-600">-</span>
+      </div>
+    </div>
+    
+    <section class="mt-12 bg-white rounded-lg shadow p-6">
+      <h2 class="text-lg font-semibold mb-4 border-b border-gray-300 pb-1">Recent Verifications</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead>
+            <tr class="text-gray-600 uppercase tracking-wide border-b border-gray-300">
+              <th class="py-2 px-3 w-24">Photo</th>
+              <th class="py-2 px-3">Datetime</th>
+              <th class="py-2 px-3">Source</th>
+              <th class="py-2 px-3">Status</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBody" class="divide-y divide-gray-200">
+              </tbody>
+        </table>
+      </div>
+    </section>  
+  </main>
+
+  <!-- <footer class="bg-white text-gray-500 text-center text-xs py-4 select-none">
+    TVS AI Face Deduplication. 
+  </footer> -->
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>
